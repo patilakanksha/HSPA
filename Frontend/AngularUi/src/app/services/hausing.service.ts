@@ -4,7 +4,7 @@ import { Observable, map } from 'rxjs';
 import { IProperty } from '../property/IProperty.interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root' 
 })
 export class HausingService {
 
