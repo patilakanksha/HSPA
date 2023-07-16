@@ -14,6 +14,14 @@ export class PropertyDetailComponent implements OnInit {
   ngOnInit() {
     this.propertyId = + this.route.snapshot.params["id"];
     // wih adding + symbol in convertinto number type
+
+    //the below code is useful to reflect url changed value on page also at the time of pagination
+    this.route.params.subscribe(
+
+      (params) =>{
+        this.propertyId = + params['id']
+      }
+    )
   }
 
   onSelectNext(){
