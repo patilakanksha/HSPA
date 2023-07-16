@@ -1,32 +1,42 @@
 [
     {
       "Id":1,
+      "SellRent": 1,
       "Name":"Birala House",
       "Type":"House",
-      "Price" : 12000
+      "Price" : 12000,
+      "Image": "house3"
     },
     {
       "Id":2,
+      "SellRent": 1,
       "Name":"Mohite House",
       "Type":"House",
       "Price" : 12000
+      
     },
     {
       "Id":3,
+      "SellRent": 1,
       "Name":"Patil House",
       "Type":"House",
-      "Price" : 12000
+      "Price" : 12000,
+      "Image": "house2"
     },
     {
       "Id":4,
+      "SellRent": 2,
       "Name":"Sunshine ",
       "Type":"Villa",
-      "Price" : 12000
+      "Price" : 12000,
+      "Image":"house1"
     },
     {
       "Id":5,
+      "SellRent": 2,
       "Name":"Deshmukh Vada",
       "Type":"Vada",
-      "Price" : 12000
+      "Price" : 12000,
+      "Image": "house4"
     }
 ]
