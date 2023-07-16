@@ -19,14 +19,14 @@
     },
     {
       "Id":4,
-      "Name":"Sunshine House",
-      "Type":"House",
+      "Name":"Sunshine ",
+      "Type":"Villa",
       "Price" : 12000
     },
     {
       "Id":5,
-      "Name":"Deshmukh House",
-      "Type":"House",
+      "Name":"Deshmukh Vada",
+      "Type":"Vada",
       "Price" : 12000
     }
 ]
