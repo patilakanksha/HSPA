@@ -9,7 +9,8 @@ import { FormControl, FormGroup, Validators, AbstractControl, ValidatorFn, FormB
 export class UserRegisterComponent implements OnInit {
 
   registrationForm!: FormGroup; 
-  
+  user:any = {};
+
   constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
@@ -23,6 +24,7 @@ export class UserRegisterComponent implements OnInit {
     }, this.passwordMatchingValidator()
     );
     */
+    this.createRegistrationForm()
   }
 
   createRegistrationForm()
@@ -83,7 +85,24 @@ export class UserRegisterComponent implements OnInit {
  }
 
   onSubmit(){
-    console.log(this.registrationForm)
+    console.log(this.registrationForm.value);
+    this.user = Object.assign(this.user, this.registrationForm.value);
+    this.addUser(this.user);
+    this.registrationForm.reset();
+  }
+  users: any[] = [];
+  
+  addUser(user: any){
+    // debugger
+    if(localStorage.getItem('Users')){
+      let tempUsers = localStorage.getItem('Users');
+      if(tempUsers)
+        this.users.push(JSON.parse(tempUsers));  
+    }
+    else{
+      this.users = [user];
+    }
+    localStorage.setItem('Users', JSON.stringify(this.users))
   }
 
 }
