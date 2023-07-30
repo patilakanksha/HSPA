@@ -14,7 +14,7 @@ export class PropertyListComponent implements OnInit {
   SellRent = 1
   
   constructor(private route: ActivatedRoute, private hausingService : HausingService) { }
-
+ 
   ngOnInit() {
     if(this.route.snapshot.url.toString())
     {
