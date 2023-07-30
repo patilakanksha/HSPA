@@ -9,6 +9,7 @@ import { IProperty } from '../property/IProperty.interface';
 export class HausingService {
 
   constructor(private http:HttpClient) { }
+  
   getAllProperties(SellRent: number): Observable<IProperty[]>{
     return this.http.get('data/properties.json').pipe(
       map(data =>{
