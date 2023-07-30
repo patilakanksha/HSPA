@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators, AbstractControl, ValidatorFn, FormBuilder} from '@angular/forms';
+import { FormControl, FormGroup, Validators, AbstractControl, ValidatorFn, FormBuilder, ValidationErrors} from '@angular/forms';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-user-register',
@@ -11,7 +12,7 @@ export class UserRegisterComponent implements OnInit {
   registrationForm!: FormGroup; 
   user:any = {};
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private userService: UserService) { }
 
   ngOnInit() {
     /* //this code clean using formBuilder in createRegistrationForm()
@@ -29,27 +30,28 @@ export class UserRegisterComponent implements OnInit {
 
   createRegistrationForm()
   {
+    debugger
     this.registrationForm = this.fb.group(
       {
         userName : [null, Validators.required],
         email : [null, [Validators.required, Validators.email]],
         password : [null, [Validators.required, Validators.minLength(8)]],
-        confirmPassword:[null, Validators.required],
+        confirmPassword:[null, [Validators.required]],
         mobile: [null, [Validators.required, Validators.maxLength(10)]],
       },
-      {
-        Validators : this.passwordMatchingValidator
-      }
-    )
+        {
+          validator: this.passwordMatchValidator
+        }
+    );
   } 
   
-
+/*
    passwordMatchingValidator(): ValidatorFn {
-    
     return (control: AbstractControl): { [key: string]: any } | null => {
+      debugger
       const password = control.get('password')?.value;
       const confirmPassword = control.get('confirmPassword')?.value;
-      debugger
+      
       const notmatched = password !== confirmPassword;
 
       // Return null if validation is successful
@@ -57,6 +59,20 @@ export class UserRegisterComponent implements OnInit {
       return notmatched ? { notmatched: true } : null;
   }
  }
+*/
+
+
+passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
+  const password = control.get('password')?.value; // Access the 'password' form control value
+  const confirmPassword = control.get('confirmPassword')?.value; // Access the 'confirmPassword' form control value
+
+  // Check if both fields have values and if they match
+  if (password !== confirmPassword) {
+    return { passwordMismatch: true };
+  }
+
+  return null; // Return null if validation passes
+}
 
 //  passwordMatchingValidatior(fg: FormGroup): Validators {
 //   return fg.get('password')?.value === fg.get('confirmPassword')?.value ? null :
@@ -87,22 +103,8 @@ export class UserRegisterComponent implements OnInit {
   onSubmit(){
     console.log(this.registrationForm.value);
     this.user = Object.assign(this.user, this.registrationForm.value);
-    this.addUser(this.user);
+    this.userService.addUser(this.user);
     this.registrationForm.reset();
   }
-  users: any[] = [];
   
-  addUser(user: any){
-    // debugger
-    if(localStorage.getItem('Users')){
-      let tempUsers = localStorage.getItem('Users');
-      if(tempUsers)
-        this.users.push(JSON.parse(tempUsers));  
-    }
-    else{
-      this.users = [user];
-    }
-    localStorage.setItem('Users', JSON.stringify(this.users))
-  }
-
 }

@@ -38,7 +38,8 @@
           <input type="text" class="form-control" formControlName="confirmPassword">
           <span class="error-block" *ngIf = "confirmPassword.touched">
             <span *ngIf="confirmPassword.hasError('required')">Please Provide Confirm Password</span>    
-            <span *ngIf="!confirmPassword.hasError('required') && registrationForm.hasError('notmatched')">Password andd Confirm Password Should be match</span> 
+            <span *ngIf="!confirmPassword.hasError('required') && registrationForm.hasError('passwordMismatch')">Password and Confirm Password Should be match</span> 
+            <!-- <span *ngIf="confirmPassword.hasError('notmatched')">Password andd Confirm Password Should be match</span>  -->
           </span>
         </div>
 
@@ -49,7 +50,7 @@
 
         <div class="form-group col-12">
           <button type="submit" class="btn btn-primary">Save</button>
-          <button type="reset" class="btn btn-secondary ml-2">Cancel</button>
+          <button type="reset" class="btn btn-secondary m-2">Cancel</button>
         </div>
    
       </form>
