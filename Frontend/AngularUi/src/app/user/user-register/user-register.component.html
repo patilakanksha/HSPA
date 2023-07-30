@@ -9,21 +9,37 @@
         <div class="form-group col-12">
             <label for="name" class="form-label">Name</label>
             <input type="text" class="form-control" formControlName="userName">
+          <!-- below userName calls to userName method of component -->
+            <span class="error-block" *ngIf = "!userName.valid && userName.touched">    
+                Plz Provide Correct Name
+            </span>
         </div>
 
         <div class="form-group col-12">
           <label for="email" class="form-label">Email</label>
           <input type="text" class="form-control" formControlName="email">
+          <span class="error-block" *ngIf = "!email.valid && email.touched">
+            <span *ngIf="email.hasError('required')">Provide  Email</span>    
+            <span *ngIf="email.hasError('email')">Provide Valid Email</span>   
+           </span>
         </div>
 
         <div class="form-group col-12">
           <label for="passwrod" class="form-label">Password</label>
           <input type="text" class="form-control" formControlName="password">
+          <span class="error-block" *ngIf = "!password.valid && password.touched">
+            <span *ngIf="password.hasError('required')">Please Provide Password</span>    
+            <span *ngIf="password.hasError('minlength')">Password minimum length is 8</span>   
+           </span>
         </div>
 
         <div class="form-group col-12">
           <label for="cpassword" class="form-label">Confirm Password</label>
           <input type="text" class="form-control" formControlName="confirmPassword">
+          <span class="error-block" *ngIf = "confirmPassword.touched">
+            <span *ngIf="confirmPassword.hasError('required')">Please Provide Confirm Password</span>    
+            <span *ngIf="!confirmPassword.hasError('required') && registrationForm.hasError('notmatched')">Password andd Confirm Password Should be match</span> 
+          </span>
         </div>
 
         <div class="form-group col-12">
